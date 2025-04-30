@@ -3,12 +3,15 @@
 
 ### Install
 ```
-$ npm i graphql-markdown
+$ npm i
 ```
 
 ### Usage
+1. 在src/project底下創建一個資料夾
+2. 將gql或graphql檔案放在該資料夾內
+3. 啟動程式
 ```
-$ graphql-markdown ./path/to/schema.graphql > schema.md
+$ npm run start
 ```
 
 ### Notice
