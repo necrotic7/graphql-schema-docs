@@ -1,4 +1,6 @@
 .vscode
 dist
 node_modules
-src/project/
+src/project/*
+# 保留 example 資料夾
+!src/project/example

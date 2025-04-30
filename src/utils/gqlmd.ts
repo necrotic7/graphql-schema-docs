@@ -5,7 +5,7 @@ import { exec } from 'child_process';
 import { getLogger } from './logger';
 
 export async function docRender(dirPath: string, files: string[]){
-    return files.map(file => fileRender(dirPath, file))
+    return files.map(file => execRender(dirPath, file))
 }
 
 export async function execRender(dirPath: string, filePath: string) {
