@@ -2,7 +2,9 @@ import path from 'path';
 import * as gqlmd from './utils/gqlmd';
 import { getAllSchemaFilePath } from './utils/files';
 import * as voyager from './utils/voyager';
+import { getLogger } from './utils/logger';
 
+const TAG = '[Main]';
 (async function(){
     const basePath = path.join(__dirname, 'project');
     // 取得所有schema
@@ -22,6 +24,7 @@ import * as voyager from './utils/voyager';
     // 啟動voyager
     voyager.start();
 })()
-.then(() => console.log('[Main] all schema generate finish.'))
-.catch((err) => console.log(err))
-;
+.catch((err) => {
+  getLogger().error(TAG, err);
+  process.exit(1);
+});

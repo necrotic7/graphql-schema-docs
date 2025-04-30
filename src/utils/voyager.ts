@@ -1,18 +1,16 @@
-// index.mjs
-
 import * as fs from 'fs/promises';
-import path from 'path';
 import express from 'express';
 import { buildSchema, introspectionFromSchema } from 'graphql';
 import { express as voyagerMiddleware  } from 'graphql-voyager/middleware';
 import { createHandler } from 'graphql-http/lib/use/express';
+import { getLogger } from './logger';
 
 const App = express();
 export async function builder(dirPath: string, files: string[]){
-    return Promise.all (
+    const TAG = '[VoyagerBuilder]';
+    const logger = getLogger();
+    await Promise.all (
         files.map(async (filePath) => {
-            // schema檔名
-            const schemaBaseName = path.basename(filePath, path.extname(filePath));
             // 讀取 .gql 檔案
             const sdl = await fs.readFile(filePath, 'utf8');
 
@@ -38,15 +36,17 @@ export async function builder(dirPath: string, files: string[]){
                 })
             );
 
-            console.log(`${voyagerApiPath} built.`)
+            logger.info(TAG, `API (${voyagerApiPath}) built.`)
         })
-    )
+    );
 }
 
 export function start() {
+    const TAG = '[VoyagerStart]';
+    const logger = getLogger();
     const PORT = 4000;
     // 啟動伺服器
     App.listen(PORT, () => {
-        console.log(`🚀 Voyager is running at http://localhost:${PORT}`);
+        logger.info(TAG, `Voyager is running at http://localhost:${PORT}`);
     });
 }

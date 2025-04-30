@@ -2,12 +2,15 @@ const gqlmd = require('graphql-markdown');
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { exec } from 'child_process';
+import { getLogger } from './logger';
 
 export async function docRender(dirPath: string, files: string[]){
-    return files.map(file => execRender(dirPath, file))
+    return files.map(file => fileRender(dirPath, file))
 }
 
 export async function execRender(dirPath: string, filePath: string) {
+    const TAG = '[GqlmdExecRender]';
+    const logger = getLogger();
     // schema檔名
     const schemaBaseName = path.basename(filePath, path.extname(filePath));
     // 文件路徑
@@ -16,15 +19,18 @@ export async function execRender(dirPath: string, filePath: string) {
     // graphql-markdown schema.gql > doc.md
     exec(`graphql-markdown ${filePath} > ${docFilePath}`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`執行錯誤: ${error}`);
+            logger.error(TAG, error);
+            throw error;
         }
     });
 
-    console.log(`file(${filePath}) render exec finish`);
+    logger.info(TAG, `file(${filePath}) render exec finish`);
 }
 
 // NOTICE: fileRender版本目前會有格式跑版問題，先以CLI版本為主
 async function fileRender(dir: string, filePath: string) {
+    const TAG = '[GqlmdFileRender]';
+    const logger = getLogger();
     // 讀取schema
     const loadedSchema = await gqlmd.loadSchemaJSON(filePath);
     // schema檔名
@@ -43,11 +49,13 @@ async function fileRender(dir: string, filePath: string) {
         (async () => {
             await fs.appendFile(docFilePath, `${data} \n`);
         })()
-        .then(() => {})
-        .catch((err) => console.log(`dir(${filePath}) print fail: ${err}`))
+        .catch((err) => {
+            logger.error(TAG, `dir(${filePath}) print fail: ${err}`);
+            throw err;
+        })
         ;
     };
 
     gqlmd.renderSchema(loadedSchema, { printer });
-    console.log(`file(${filePath}) render finish`);
+    logger.info(TAG, `file(${filePath}) render finish`);
 }
