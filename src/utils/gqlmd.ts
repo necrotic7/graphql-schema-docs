@@ -1,11 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const gqlmd = require('graphql-markdown');
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { exec } from 'child_process';
 import { getLogger } from './logger';
 
-export async function docRender(dirPath: string, files: string[]){
-    return files.map(file => execRender(dirPath, file))
+export async function docRender(dirPath: string, files: string[]) {
+    return files.map((file) => execRender(dirPath, file));
 }
 
 export async function execRender(dirPath: string, filePath: string) {
@@ -17,7 +18,7 @@ export async function execRender(dirPath: string, filePath: string) {
     const docFilePath = path.join(dirPath, `${schemaBaseName}-doc.md`);
 
     // graphql-markdown schema.gql > doc.md
-    exec(`graphql-markdown ${filePath} > ${docFilePath}`, (error, stdout, stderr) => {
+    exec(`graphql-markdown ${filePath} > ${docFilePath}`, (error) => {
         if (error) {
             logger.error(TAG, error);
             throw error;
@@ -39,21 +40,22 @@ async function fileRender(dir: string, filePath: string) {
     const docFilePath = path.join(dir, `${schemaBaseName}-doc.md`);
 
     // 先確認文件是不是已存在，如果存在要先清空
-    try{
+    try {
         await fs.access(docFilePath);
-        await fs.writeFile(docFilePath, '')
-    }catch(err){}
+        await fs.writeFile(docFilePath, '');
+        logger.info(TAG, `${docFilePath} exist, clear success..`);
+    } catch {
+        logger.info(TAG, `${docFilePath} not exist, create new..`);
+    }
 
     // 產生sync printer 給 graphql-markdown
     const printer = (data: string) => {
         (async () => {
             await fs.appendFile(docFilePath, `${data} \n`);
-        })()
-        .catch((err) => {
+        })().catch((err) => {
             logger.error(TAG, `dir(${filePath}) print fail: ${err}`);
             throw err;
-        })
-        ;
+        });
     };
 
     gqlmd.renderSchema(loadedSchema, { printer });

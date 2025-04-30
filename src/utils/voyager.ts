@@ -1,28 +1,28 @@
 import * as fs from 'fs/promises';
 import express from 'express';
-import { buildSchema, introspectionFromSchema } from 'graphql';
-import { express as voyagerMiddleware  } from 'graphql-voyager/middleware';
+import { buildSchema } from 'graphql';
+import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { getLogger } from './logger';
 
 const App = express();
-export async function builder(dirPath: string, files: string[]){
+export async function builder(dirPath: string, files: string[]) {
     const TAG = '[VoyagerBuilder]';
     const logger = getLogger();
-    await Promise.all (
+    await Promise.all(
         files.map(async (filePath) => {
             // 讀取 .gql 檔案
             const sdl = await fs.readFile(filePath, 'utf8');
 
             // api 路徑
             const dirSplits = dirPath.split('/');
-            const apiPath = `/${dirSplits[dirSplits.length -1]}`;
+            const apiPath = `/${dirSplits[dirSplits.length - 1]}`;
             const graphqlApiPath = apiPath + '/graphql';
             const voyagerApiPath = apiPath + '/voyager';
 
             // 建立 GraphQL Schema
             const schema = buildSchema(sdl);
-            
+
             App.use(graphqlApiPath, createHandler({ schema }));
 
             // 設定 Voyager 中介軟體
@@ -33,11 +33,11 @@ export async function builder(dirPath: string, files: string[]){
                     displayOptions: {
                         sortByAlphabet: true,
                     },
-                })
+                }),
             );
 
-            logger.info(TAG, `API (${voyagerApiPath}) built.`)
-        })
+            logger.info(TAG, `API (${voyagerApiPath}) built.`);
+        }),
     );
 }
 

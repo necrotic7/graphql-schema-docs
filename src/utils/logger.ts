@@ -4,8 +4,7 @@ import moment from 'moment';
 let GlobalLogger: Logger | undefined;
 
 export function getLogger() {
-    if (!GlobalLogger)
-        GlobalLogger = new Logger();
+    if (!GlobalLogger) GlobalLogger = new Logger();
     return GlobalLogger.get();
 }
 
@@ -34,14 +33,14 @@ class Logger {
     customFormat = winston.format.printf(({ level, message }) => {
         const formattedTime = moment().format('YYYY/MM/DD HH:mm:ss');
         return `[${formattedTime}][${level}] ${message}`;
-    })
+    });
 
     init() {
         const logger = winston.createLogger({
             levels: customLevels.levels,
             format: winston.format.combine(
                 winston.format.colorize({ all: true }),
-                this.customFormat
+                this.customFormat,
             ),
             transports: [new winston.transports.Console()],
         });
@@ -56,13 +55,16 @@ class Logger {
         const wrappedLogger: any = {};
         const levels = Object.keys(customLevels.levels);
 
-        levels.forEach(level => {
+        levels.forEach((level) => {
             wrappedLogger[level] = (tag: string, ...msg: any[]) => {
                 const fullMsg = `${tag} ${msg.join(' ')}`;
                 baseLogger.log(level, fullMsg);
             };
         });
 
-        return wrappedLogger as Record<keyof typeof customLevels.levels, (tag: string, ...msg: any[]) => void>;
+        return wrappedLogger as Record<
+            keyof typeof customLevels.levels,
+            (tag: string, ...msg: any[]) => void
+        >;
     }
 }
