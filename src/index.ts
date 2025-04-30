@@ -7,7 +7,7 @@ import { getLogger } from './utils/logger';
 const TAG = '[Main]';
 
 (async function () {
-    const basePath = path.join(__dirname, 'project');
+    const basePath = path.join(__dirname, 'clinico');
     // 取得所有schema
     const schemaFiles = await getAllSchemaFilePath(basePath);
 
