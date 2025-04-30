@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import fg from 'fast-glob';
 
@@ -13,6 +13,5 @@ export async function getAllSchemaFilePath(basePath: string) {
             return { dirPath, files };
           })
     );
-
     return results;
 }

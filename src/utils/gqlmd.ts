@@ -1,8 +1,11 @@
 const gqlmd = require('graphql-markdown');
-import { promises as fs } from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
-import fg from 'fast-glob';
 import { exec } from 'child_process';
+
+export async function docRender(dirPath: string, files: string[]){
+    return files.map(file => execRender(dirPath, file))
+}
 
 export async function execRender(dirPath: string, filePath: string) {
     // schema檔名
