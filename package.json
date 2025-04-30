@@ -14,8 +14,11 @@
     "clinico-store-api": "file:../ts/clinico-store-api/clinico-store-api-1.33.15.tgz",
     "fast-glob": "^3.3.3",
     "graphql": "^16.10.0",
+    "graphql-http": "^1.22.4",
     "graphql-markdown": "^7.3.0",
-    "reflect-metadata": "^0.2.2"
+    "graphql-voyager": "^2.1.0",
+    "reflect-metadata": "^0.2.2",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",

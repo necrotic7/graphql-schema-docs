@@ -1,6 +1,7 @@
 import path from 'path';
 import * as gqlmd from './utils/gqlmd';
 import { getAllSchemaFilePath } from './utils/files';
+import * as voyager from './utils/voyager';
 
 (async function(){
     const basePath = path.join(__dirname, 'project');
@@ -12,10 +13,14 @@ import { getAllSchemaFilePath } from './utils/files';
           await Promise.all([
             // 建立md文件
             gqlmd.docRender(dirPath, files),
+            // 建立voyager
+            voyager.builder(dirPath, files),
           ])
         }
       )
     )
+    // 啟動voyager
+    voyager.start();
 })()
 .then(() => console.log('[Main] all schema generate finish.'))
 .catch((err) => console.log(err))
