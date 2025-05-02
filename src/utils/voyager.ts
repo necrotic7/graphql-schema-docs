@@ -4,30 +4,42 @@ import { buildSchema } from 'graphql';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { getLogger } from './logger';
+import { EnumRouterType, TRouter } from '../types/types';
 
-const App = express();
-export async function builder(dirPath: string, files: string[]) {
+export async function builder(
+    app: express.Express,
+    dirName: string,
+    dirPath: string,
+    files: string[],
+) {
     const TAG = '[VoyagerBuilder]';
     const logger = getLogger();
+    const routers: TRouter[] = [];
     await Promise.all(
         files.map(async (filePath) => {
             // 讀取 .gql 檔案
             const sdl = await fs.readFile(filePath, 'utf8');
+            // 讀取 schema readme
+            let readme = '';
+            try {
+                readme = await fs.readFile(dirPath + '/README.md', 'utf8');
+            } catch {
+                logger.info(TAG, `${dirPath} missing README.md, skip reading`);
+            }
 
             // api 路徑
-            const dirSplits = dirPath.split('/');
-            const apiPath = `/${dirSplits[dirSplits.length - 1]}`;
-            const graphqlApiPath = apiPath + '/graphql';
-            const voyagerApiPath = apiPath + '/voyager';
+            const rootPath = `/${dirName}`;
+            const graphqlApiPath = rootPath + '/graphql';
+            const voyagerPath = rootPath + '/voyager';
 
             // 建立 GraphQL Schema
             const schema = buildSchema(sdl);
 
-            App.use(graphqlApiPath, createHandler({ schema }));
+            app.use(graphqlApiPath, createHandler({ schema }));
 
             // 設定 Voyager 中介軟體
-            App.use(
-                voyagerApiPath,
+            app.use(
+                voyagerPath,
                 voyagerMiddleware({
                     endpointUrl: graphqlApiPath,
                     displayOptions: {
@@ -36,17 +48,14 @@ export async function builder(dirPath: string, files: string[]) {
                 }),
             );
 
-            logger.info(TAG, `API (${voyagerApiPath}) built.`);
+            routers.push({
+                type: EnumRouterType.VOYAGER,
+                path: voyagerPath,
+                description: readme,
+            });
+
+            logger.info(TAG, `route (${voyagerPath}) built`);
         }),
     );
-}
-
-export function start() {
-    const TAG = '[VoyagerStart]';
-    const logger = getLogger();
-    const PORT = 4000;
-    // 啟動伺服器
-    App.listen(PORT, () => {
-        logger.info(TAG, `Voyager is running at http://localhost:${PORT}`);
-    });
+    return routers;
 }

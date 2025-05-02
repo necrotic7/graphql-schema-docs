@@ -4,18 +4,33 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { exec } from 'child_process';
 import { getLogger } from './logger';
+import express from 'express';
+import { marked } from 'marked';
+import { EnumRouterType, TRouter } from '../types/types';
 
-export async function docRender(dirPath: string, files: string[]) {
-    return files.map((file) => execRender(dirPath, file));
+export async function docRender(
+    app: express.Express,
+    dirName: string,
+    dirPath: string,
+    files: string[],
+) {
+    return await Promise.all(files.map((file) => execRender(app, dirName, dirPath, file)));
 }
 
-export async function execRender(dirPath: string, filePath: string) {
+export async function execRender(
+    app: express.Express,
+    dirName: string,
+    dirPath: string,
+    filePath: string,
+): Promise<TRouter> {
     const TAG = '[GqlmdExecRender]';
     const logger = getLogger();
     // schema檔名
     const schemaBaseName = path.basename(filePath, path.extname(filePath));
+    // 文件檔名
+    const docFileName = `${schemaBaseName}-doc.md`;
     // 文件路徑
-    const docFilePath = path.join(dirPath, `${schemaBaseName}-doc.md`);
+    const docFilePath = path.join(dirPath, docFileName);
 
     // graphql-markdown schema.gql > doc.md
     exec(`graphql-markdown ${filePath} > ${docFilePath}`, (error) => {
@@ -26,6 +41,23 @@ export async function execRender(dirPath: string, filePath: string) {
     });
 
     logger.info(TAG, `file(${filePath}) render exec finish`);
+
+    // 把生成好的文件讀取出來
+    const docContent = await fs.readFile(docFilePath, 'utf8');
+    const htmlContent = marked(docContent);
+    const docPath = `/${dirName}/doc`;
+    app.get(docPath, (req, res) => {
+        res.render('doc', {
+            title: `/${dirName}/${docFileName}`,
+            content: htmlContent,
+        });
+    });
+    logger.info(TAG, `route (${docPath}) built`);
+    return {
+        type: EnumRouterType.DOC,
+        path: docPath,
+        description: `${dirName} schema markdown file`,
+    };
 }
 
 // NOTICE: fileRender版本目前會有格式跑版問題，先以CLI版本為主
