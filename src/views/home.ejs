@@ -14,9 +14,10 @@
     const data = <%- tableData %>;
 
     new gridjs.Grid({
-      columns: ['method', 'path', 'description'],
-      data: data.map(row => [row.method, row.path, gridjs.html(marked.parse(row.description || ''))]),
+      columns: ['type', 'path', 'description'],
+      data: data.map(row => [row.type, row.path, gridjs.html(marked.parse(row.description || ''))]),
       search: true,
+      sort: true,
     }).render(document.getElementById('table'));
   </script>
 </body>

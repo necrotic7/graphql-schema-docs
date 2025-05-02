@@ -10,7 +10,9 @@ export async function getAllSchemaFilePath(basePath: string) {
             .map(async (dirent) => {
                 const dirPath = path.join(basePath, dirent.name);
                 const files = await fg(`${dirPath}/**/*.{gql,graphql}`);
-                return { dirPath, files };
+                const dirSplits = dirPath.split('/');
+                const dirName = dirSplits[dirSplits.length - 1];
+                return { dirName, dirPath, files };
             }),
     );
     return results;
