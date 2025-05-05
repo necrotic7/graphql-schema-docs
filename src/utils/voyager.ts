@@ -31,15 +31,15 @@ export async function builder(
             const rootPath = `/${dirName}`;
             const graphqlApiPath = rootPath + '/graphql';
             const voyagerPath = rootPath + '/voyager';
-
+            const voyagerMiddlewarePath = voyagerPath + '/mid';
             // 建立 GraphQL Schema
             const schema = buildSchema(sdl);
 
             app.use(graphqlApiPath, createHandler({ schema }));
 
             // 設定 Voyager 中介軟體
-            app.use(
-                voyagerPath,
+            app.get(
+                voyagerMiddlewarePath,
                 voyagerMiddleware({
                     endpointUrl: graphqlApiPath,
                     displayOptions: {
@@ -47,6 +47,13 @@ export async function builder(
                     },
                 }),
             );
+
+            app.get(voyagerPath, (req, res) => {
+                res.render('voyager', {
+                    title: dirName,
+                    path: voyagerMiddlewarePath,
+                });
+            });
 
             routers.push({
                 folder: dirName,

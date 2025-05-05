@@ -48,7 +48,7 @@ export async function execRender(
     const docPath = `/${dirName}/doc`;
     app.get(docPath, (req, res) => {
         res.render('doc', {
-            title: `/${dirName}/${docFileName}`,
+            title: dirName,
             content: htmlContent,
         });
     });
