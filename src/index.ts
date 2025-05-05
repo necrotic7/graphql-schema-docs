@@ -35,7 +35,7 @@ const TAG = '[Main]';
     // 設定首頁
     app.get('/', (req, res) => {
         res.render('home', {
-            tableData: JSON.stringify(Routers),
+            tableData: JSON.stringify(Routers.sort()),
         });
     });
     // 啟動express
