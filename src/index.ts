@@ -4,7 +4,7 @@ import { getAllSchemaFilePath } from './utils/files';
 import * as voyager from './utils/voyager';
 import { getLogger } from './utils/logger';
 import express from 'express';
-import { TRouter } from './types/types';
+import { TRouter } from './types/router';
 
 const TAG = '[Main]';
 
@@ -31,6 +31,7 @@ const TAG = '[Main]';
             Routers.push(...voyagerRouters);
         }),
     );
+
     // 設定首頁
     app.get('/', (req, res) => {
         res.render('home', {
@@ -38,7 +39,8 @@ const TAG = '[Main]';
         });
     });
     // 啟動express
-    app.listen(4000);
+    const port = 4000;
+    app.listen(port, () => getLogger().info(TAG, `app listening on port ${port}`));
 })().catch((err) => {
     getLogger().error(TAG, err);
     process.exit(1);

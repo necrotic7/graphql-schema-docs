@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <title>schema doc homepage</title>
+  <!-- Includes all JS & CSS for the JavaScript Data Grid -->
+  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"> </script>
 </head>
 <body>
   <h2>頁面清單</h2>
-  <div id="table"></div>
+  <div id="table" style="height: 500px; width: 100%;"></div>
 
-  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     const data = <%- tableData %>;
 
-    new gridjs.Grid({
-      columns: ['type', 'path', 'description'],
-      data: data.map(row => [row.type, row.path, gridjs.html(marked.parse(row.description || ''))]),
-      search: true,
-      sort: true,
-    }).render(document.getElementById('table'));
-  </script>
+    // 處理你的 data，加超連結跟 markdown
+    const rowData = data.map(row => ({
+      folder: row.folder,
+      type: row.type,
+      path: row.path,
+      description: marked.parse(row.description || '')
+    }));
+
+    // ag-Grid 欄位定義
+    const columnDefs = [
+      { headerName: 'folder', field: 'folder', sortable: true, filter: true },
+      { headerName: 'type', field: 'type', sortable: true, filter: true },
+      { headerName: 'path', field: 'path', sortable: true, filter: true,
+        cellRenderer: params => {
+          const url = window.location.origin + (params.value.startsWith('/') ? params.value : '/' + params.value);
+          return `<a href="${url}">${params.value}</a>`;
+        }
+      },
+      { headerName: 'description', field: 'description', flex: 1, autoHeight: true,
+        cellRenderer: params => params.value 
+      }
+    ];
+
+    // 建立 grid
+    const gridOptions = {
+      columnDefs,
+      rowData,
+      defaultColDef: {
+        resizable: true, sortable: true, filter: true
+      }
+    };
+
+    // render
+    agGrid.createGrid(document.getElementById('table'), gridOptions);
+    </script>
 </body>
 </html>
