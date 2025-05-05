@@ -6,6 +6,9 @@
   "scripts": {
     "start": "npx ts-node src/index.ts"
   },
+  "stackblitz": {
+    "startCommand": "git checkout clinico && npm install && npm run start"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
