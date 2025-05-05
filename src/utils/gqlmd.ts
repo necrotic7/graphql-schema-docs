@@ -6,7 +6,7 @@ import { exec } from 'child_process';
 import { getLogger } from './logger';
 import express from 'express';
 import { marked } from 'marked';
-import { EnumRouterType, TRouter } from '../types/types';
+import { EnumRouterType, TRouter } from '../types/router';
 
 export async function docRender(
     app: express.Express,
@@ -54,6 +54,7 @@ export async function execRender(
     });
     logger.info(TAG, `route (${docPath}) built`);
     return {
+        folder: dirName,
         type: EnumRouterType.DOC,
         path: docPath,
         description: `${dirName} schema markdown file`,

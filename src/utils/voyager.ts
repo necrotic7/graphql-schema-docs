@@ -4,7 +4,7 @@ import { buildSchema } from 'graphql';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { getLogger } from './logger';
-import { EnumRouterType, TRouter } from '../types/types';
+import { EnumRouterType, TRouter } from '../types/router';
 
 export async function builder(
     app: express.Express,
@@ -49,6 +49,7 @@ export async function builder(
             );
 
             routers.push({
+                folder: dirName,
                 type: EnumRouterType.VOYAGER,
                 path: voyagerPath,
                 description: readme,

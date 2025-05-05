@@ -1,4 +1,5 @@
 export type TRouter = {
+    folder: string;
     type: EnumRouterType;
     path: string;
     description?: string;
