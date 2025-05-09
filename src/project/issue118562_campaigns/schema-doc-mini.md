@@ -14,7 +14,11 @@
 <tr>
 <td colspan="2" valign="top"><strong id="query.campaigns">campaigns</strong></td>
 <td valign="top">[<a href="#campaign">Campaign</a>!]!</td>
-<td></td>
+<td>
+
+活動查詢
+
+</td>
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">id</td>
@@ -29,7 +33,11 @@
 <tr>
 <td colspan="2" valign="top"><strong id="query.campaignswrap">campaignsWrap</strong></td>
 <td valign="top"><a href="#campaignwrap">CampaignWrap</a>!</td>
-<td></td>
+<td>
+
+活動列表查詢
+
+</td>
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">id</td>
@@ -56,8 +64,8 @@
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong id="mutation.create">create</strong></td>
-<td valign="top"><a href="#id">ID</a>!</td>
+<td colspan="2" valign="top"><strong id="mutation.createcampaign">createCampaign</strong></td>
+<td valign="top"><a href="#campaignmutationresponse">CampaignMutationResponse</a>!</td>
 <td>
 
 創建活動
@@ -70,8 +78,8 @@
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="mutation.delete">delete</strong></td>
-<td valign="top"><a href="#id">ID</a>!</td>
+<td colspan="2" valign="top"><strong id="mutation.deletecampaign">deleteCampaign</strong></td>
+<td valign="top"><a href="#campaignmutationresponse">CampaignMutationResponse</a>!</td>
 <td>
 
 刪除活動
@@ -84,8 +92,8 @@
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="mutation.update">update</strong></td>
-<td valign="top"><a href="#id">ID</a>!</td>
+<td colspan="2" valign="top"><strong id="mutation.updatecampaign">updateCampaign</strong></td>
+<td valign="top"><a href="#campaignmutationresponse">CampaignMutationResponse</a>!</td>
 <td>
 
 更新活動
@@ -102,7 +110,6 @@
 
 ## Objects
 
-
 ### Campaign
 
 <table>
@@ -117,8 +124,12 @@
 <tbody>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.campaignpotentialtargetfield">campaignPotentialTargetField</strong></td>
-<td valign="top">[<a href="#campaignpotentialtargetfieldrelations">CampaignPotentialTargetFieldRelations</a>!]!</td>
-<td></td>
+<td valign="top">[<a href="#campaignpotentialtargetfieldrelations">CampaignPotentialTargetFieldRelations</a>!]</td>
+<td>
+
+活動表單潛客資料欄位
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.company">company</strong></td>
@@ -128,12 +139,20 @@
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.createdat">createdAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a></td>
-<td></td>
+<td>
+
+建立日期
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.enddate">endDate</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+活動結束日期
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.id">id</strong></td>
@@ -143,12 +162,20 @@
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.link">link</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+活動連結
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.name">name</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
-<td></td>
+<td>
+
+活動名稱
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.potentialcustomer">potentialCustomer</strong></td>
@@ -157,23 +184,63 @@
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.questionnaires">questionnaires</strong></td>
-<td valign="top"><a href="#campaignquestionnaire">CampaignQuestionnaire</a>!</td>
-<td></td>
+<td valign="top"><a href="#campaignquestionnaire">CampaignQuestionnaire</a></td>
+<td>
+
+活動表單配置
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.source">source</strong></td>
 <td valign="top"><a href="#campaignsource">CampaignSource</a></td>
-<td></td>
+<td>
+
+活動來源
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.startdate">startDate</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+活動開始日
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaign.updatedat">updatedAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a></td>
-<td></td>
+<td>
+
+更新日期
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### CampaignMutationResponse
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignmutationresponse.campaignid">campaignId</strong></td>
+<td valign="top"><a href="#id">ID</a>!</td>
+<td>
+
+活動id
+
+</td>
 </tr>
 </tbody>
 </table>
@@ -200,14 +267,22 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.createuser">createUser</strong></td>
-<td valign="top"><a href="#user">User</a>!</td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.createdat">createdAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a>!</td>
-<td></td>
+<td>
+
+建立時間
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.createduser">createdUser</strong></td>
+<td valign="top"><a href="#user">User</a>!</td>
+<td>
+
+建立人
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.formtag">formTag</strong></td>
@@ -233,14 +308,22 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.updateuser">updateUser</strong></td>
-<td valign="top"><a href="#user">User</a></td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.updatedat">updatedAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a>!</td>
-<td></td>
+<td>
+
+更新時間
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignpotentialtargetfieldrelations.updateduser">updatedUser</strong></td>
+<td valign="top"><a href="#user">User</a></td>
+<td>
+
+更新人
+
+</td>
 </tr>
 </tbody>
 </table>
@@ -260,12 +343,20 @@
 <tr>
 <td colspan="2" valign="top"><strong id="campaignsource.campaign">campaign</strong></td>
 <td valign="top">[<a href="#campaign">Campaign</a>!]</td>
-<td></td>
+<td>
+
+關聯活動
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaignsource.code">code</strong></td>
 <td valign="top"><a href="#enumcampaignsourcecode">EnumCampaignSourceCode</a>!</td>
-<td></td>
+<td>
+
+活動來源代號
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="campaignsource.id">id</strong></td>
@@ -275,7 +366,11 @@
 <tr>
 <td colspan="2" valign="top"><strong id="campaignsource.name">name</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
-<td></td>
+<td>
+
+來源名稱
+
+</td>
 </tr>
 </tbody>
 </table>
@@ -305,6 +400,7 @@
 </tbody>
 </table>
 
+
 ### PotentialTargetFields
 
 <table>
@@ -320,7 +416,11 @@
 <tr>
 <td colspan="2" valign="top"><strong id="potentialtargetfields.createdat">createdAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a>!</td>
-<td></td>
+<td>
+
+建立時間
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="potentialtargetfields.description">description</strong></td>
@@ -357,12 +457,232 @@
 <tr>
 <td colspan="2" valign="top"><strong id="potentialtargetfields.updatedat">updatedAt</strong></td>
 <td valign="top"><a href="#datetime">DateTime</a>!</td>
+<td>
+
+更新時間
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### QuestionnaireMetaLeadAd
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.campaign">campaign</strong></td>
+<td valign="top"><a href="#campaign">Campaign</a></td>
+<td>
+
+活動
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.campaignid">campaignId</strong></td>
+<td valign="top"><a href="#id">ID</a></td>
 <td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.createdat">createdAt</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.createduser">createdUser</strong></td>
+<td valign="top"><a href="#user">User</a></td>
+<td>
+
+建立人
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.deleted">deleted</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.formid">formId</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.id">id</strong></td>
+<td valign="top"><a href="#id">ID</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.updatedat">updatedAt</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairemetaleadad.updateduser">updatedUser</strong></td>
+<td valign="top"><a href="#user">User</a></td>
+<td>
+
+最後修改人
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### QuestionnaireSurveycake
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.campaign">campaign</strong></td>
+<td valign="top"><a href="#campaign">Campaign</a></td>
+<td>
+
+活動
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.campaignid">campaignId</strong></td>
+<td valign="top"><a href="#id">ID</a></td>
+<td>
+
+關聯活動id
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.company">company</strong></td>
+<td valign="top"><a href="#company">Company</a></td>
+<td>
+
+通路
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.companyid">companyId</strong></td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td>
+
+公司id
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.createdat">createdAt</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td>
+
+建立時間
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.createduser">createdUser</strong></td>
+<td valign="top"><a href="#user">User</a></td>
+<td>
+
+建立人
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.decodehashkey">decodeHashKey</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.decodeivkey">decodeIvKey</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.id">id</strong></td>
+<td valign="top"><a href="#id">ID</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.svid">svid</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.type">type</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.updatedat">updatedAt</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td>
+
+更新時間
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="questionnairesurveycake.updateduser">updatedUser</strong></td>
+<td valign="top"><a href="#user">User</a></td>
+<td>
+
+最後修改人
+
+</td>
 </tr>
 </tbody>
 </table>
 
 ## Inputs
+
+### CreateCampaignFormFieldInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="createcampaignformfieldinput.field">field</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+潛客資料欄位代號
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="createcampaignformfieldinput.tag">tag</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+表單自定義欄位標籤
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ### CreateCampaignInput
 
@@ -387,7 +707,11 @@
 <tr>
 <td colspan="2" valign="top"><strong id="createcampaigninput.companyid">companyId</strong></td>
 <td valign="top"><a href="#id">ID</a>!</td>
-<td></td>
+<td>
+
+公司id
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="createcampaigninput.enddate">endDate</strong></td>
@@ -400,7 +724,7 @@
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="createcampaigninput.formfields">formFields</strong></td>
-<td valign="top"><a href="#json">JSON</a></td>
+<td valign="top">[<a href="#createcampaignformfieldinput">CreateCampaignFormFieldInput</a>!]</td>
 <td>
 
 表單欄位
@@ -467,15 +791,6 @@ SurveyCake表單設定
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong id="createquestionnairemetainput.campaignsource">campaignSource</strong></td>
-<td valign="top"><a href="#enumcampaignsourcecode">EnumCampaignSourceCode</a>!</td>
-<td>
-
-活動來源
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="createquestionnairemetainput.formid">formId</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
 <td>
@@ -499,15 +814,6 @@ SurveyCake表單設定
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.campaignsource">campaignSource</strong></td>
-<td valign="top"><a href="#enumcampaignsourcecode">EnumCampaignSourceCode</a>!</td>
-<td>
-
-活動來源
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.decodehashkey">decodeHashKey</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
 <td></td>
@@ -518,23 +824,8 @@ SurveyCake表單設定
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.idalias">idAlias</strong></td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.idsn">idSn</strong></td>
-<td valign="top"><a href="#int">Int</a>!</td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.svid">svid</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="createquestionnairesurveycakeinput.type">type</strong></td>
-<td valign="top"><a href="#enumquestionnairesurveycaketype">EnumQuestionnaireSurveycakeType</a>!</td>
 <td></td>
 </tr>
 </tbody>
@@ -562,10 +853,19 @@ SurveyCake表單設定
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="updatecampaigninput.formfields">formFields</strong></td>
-<td valign="top"><a href="#json">JSON</a></td>
+<td valign="top">[<a href="#createcampaignformfieldinput">CreateCampaignFormFieldInput</a>!]</td>
 <td>
 
 表單欄位
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="updatecampaigninput.id">id</strong></td>
+<td valign="top"><a href="#id">ID</a>!</td>
+<td>
+
+表單id
 
 </td>
 </tr>
@@ -678,30 +978,6 @@ Resmed租借
 </tbody>
 </table>
 
-
-### EnumQuestionnaireSurveycakeType
-
-問卷類型
-
-<table>
-<thead>
-<tr>
-<th align="left">Value</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td valign="top"><strong>visitTracking</strong></td>
-<td>
-
-客戶來店追蹤
-
-</td>
-</tr>
-</tbody>
-</table>
-
 ## Unions
 
 ### CampaignQuestionnaire
@@ -716,11 +992,11 @@ Resmed租借
 <tbody>
 <tr>
 <td valign="top"><strong><a href="#questionnairemetaleadad">QuestionnaireMetaLeadAd</a></strong></td>
-<td>Meta表單配置</td>
+<td>Meta活動表單配置</td>
 </tr>
 <tr>
 <td valign="top"><strong><a href="#questionnairesurveycake">QuestionnaireSurveycake</a></strong></td>
-<td>SurveyCake表單配置</td>
+<td>SurveyCake活動表單配置</td>
 </tr>
 </tbody>
 </table>
