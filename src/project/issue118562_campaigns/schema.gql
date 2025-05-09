@@ -10,6 +10,7 @@ type Area {
   viewOrder: Int!
 }
 
+"""行銷活動"""
 type Campaign {
   """活動表單潛客資料欄位"""
   campaignPotentialTargetField: [CampaignPotentialTargetFieldRelations!]
@@ -42,11 +43,13 @@ type Campaign {
   updatedAt: DateTime
 }
 
+"""操作活動結果"""
 type CampaignMutationResponse {
   """活動id"""
   campaignId: ID!
 }
 
+"""活動表單對應潛客欄位關聯表"""
 type CampaignPotentialTargetFieldRelations {
   """關聯活動"""
   campaign: Campaign!
@@ -85,6 +88,7 @@ type CampaignSource {
   name: String!
 }
 
+"""活動列表"""
 type CampaignWrap {
   campaigns: [Campaign!]
   count: Int!
@@ -106,6 +110,7 @@ type Company {
   phone: String
 }
 
+"""創建活動-潛客資料欄位參數"""
 input CreateCampaignFormFieldInput {
   """潛客資料欄位代號"""
   field: String!
@@ -114,6 +119,7 @@ input CreateCampaignFormFieldInput {
   tag: String!
 }
 
+"""創建活動參數"""
 input CreateCampaignInput {
   """活動來源"""
   campaignSourceCode: EnumCampaignSourceCode!
@@ -143,11 +149,13 @@ input CreateCampaignInput {
   startDate: String
 }
 
+"""創建活動-Meta表單設置參數"""
 input CreateQuestionnaireMetaInput {
   """表單id"""
   formId: String!
 }
 
+"""創建活動-SurveyCake表單設置參數"""
 input CreateQuestionnaireSurveycakeInput {
   decodeHashKey: String!
   decodeIvKey: String!
@@ -251,6 +259,7 @@ type PotentialCustomer {
   updatedAt: DateTime
 }
 
+"""潛客資料欄位"""
 type PotentialTargetFields {
   """建立時間"""
   createdAt: DateTime!
@@ -277,6 +286,7 @@ type Query {
   campaignsWrap(id: ID, limit: Int): CampaignWrap!
 }
 
+"""問卷 meta lead ad"""
 type QuestionnaireMetaLeadAd {
   """活動"""
   campaign: Campaign
@@ -294,6 +304,7 @@ type QuestionnaireMetaLeadAd {
   updatedUser: User
 }
 
+"""問卷 surveycakes"""
 type QuestionnaireSurveycake {
   """活動"""
   campaign: Campaign
@@ -461,6 +472,7 @@ type StoreInvoicePool {
   store: Store!
 }
 
+"""更新表單參數"""
 input UpdateCampaignInput {
   """結束日期"""
   endDate: String

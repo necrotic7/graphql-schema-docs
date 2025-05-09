@@ -199,6 +199,8 @@
 
 ### Campaign
 
+行銷活動
+
 <table>
 <thead>
 <tr>
@@ -310,6 +312,8 @@
 
 ### CampaignMutationResponse
 
+操作活動結果
+
 <table>
 <thead>
 <tr>
@@ -333,6 +337,8 @@
 </table>
 
 ### CampaignPotentialTargetFieldRelations
+
+活動表單對應潛客欄位關聯表
 
 <table>
 <thead>
@@ -463,6 +469,8 @@
 </table>
 
 ### CampaignWrap
+
+活動列表
 
 <table>
 <thead>
@@ -734,6 +742,8 @@
 
 ### PotentialTargetFields
 
+潛客資料欄位
+
 <table>
 <thead>
 <tr>
@@ -798,6 +808,8 @@
 </table>
 
 ### QuestionnaireMetaLeadAd
+
+問卷 meta lead ad
 
 <table>
 <thead>
@@ -870,6 +882,8 @@
 </table>
 
 ### QuestionnaireSurveycake
+
+問卷 surveycakes
 
 <table>
 <thead>
@@ -1695,6 +1709,8 @@ IPBX 門市 ID
 
 ### CreateCampaignFormFieldInput
 
+創建活動-潛客資料欄位參數
+
 <table>
 <thead>
 <tr>
@@ -1726,6 +1742,8 @@ IPBX 門市 ID
 </table>
 
 ### CreateCampaignInput
+
+創建活動參數
 
 <table>
 <thead>
@@ -1822,6 +1840,8 @@ SurveyCake表單設定
 
 ### CreateQuestionnaireMetaInput
 
+創建活動-Meta表單設置參數
+
 <table>
 <thead>
 <tr>
@@ -1844,6 +1864,8 @@ SurveyCake表單設定
 </table>
 
 ### CreateQuestionnaireSurveycakeInput
+
+創建活動-SurveyCake表單設置參數
 
 <table>
 <thead>
@@ -1873,6 +1895,8 @@ SurveyCake表單設定
 </table>
 
 ### UpdateCampaignInput
+
+更新表單參數
 
 <table>
 <thead>
@@ -2165,11 +2189,19 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 <tbody>
 <tr>
 <td valign="top"><strong><a href="#questionnairemetaleadad">QuestionnaireMetaLeadAd</a></strong></td>
-<td></td>
+<td valign="top">
+
+問卷 meta lead ad
+
+</td>
 </tr>
 <tr>
 <td valign="top"><strong><a href="#questionnairesurveycake">QuestionnaireSurveycake</a></strong></td>
-<td></td>
+<td valign="top">
+
+問卷 surveycakes
+
+</td>
 </tr>
 </tbody>
 </table>
