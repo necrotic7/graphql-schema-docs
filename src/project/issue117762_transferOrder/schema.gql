@@ -115,25 +115,6 @@ enum EnumStoreType {
   HomeSvcRS
 }
 
-type MaterialKeywordDetail {
-  """料號"""
-  code: String!
-
-  """是否序號管理"""
-  isSnManage: Boolean!
-
-  """品名"""
-  name: String
-
-  """規格"""
-  specification: String
-}
-
-type MaterialKeywordWrap {
-  count: Int!
-  materials: [MaterialKeywordDetail!]!
-}
-
 type Mutation {
   """調撥單銷退"""
   cancelStoreTransferOut(createdUserCode: String, legal: String!, relatedTransferOrderCode: String!): Boolean!
@@ -145,6 +126,7 @@ type Mutation {
   postStoreTransferInConfirm(createdUserCode: String, storeCode: String!, transferOrderCode: String!): Boolean! @deprecated(reason: "請使用新版調撥單撥入操作(operateStoreTransferIn)")
 }
 
+"""調撥單撥入操作參數"""
 input OperateStoreTransferInInput {
   """確認品項清單"""
   items: [OperateStoreTransferInItem!]!
@@ -156,7 +138,11 @@ input OperateStoreTransferInInput {
   transferOrderCode: String!
 }
 
+"""調撥單撥入操作品項清單"""
 input OperateStoreTransferInItem {
+  """損壞資訊"""
+  brokenInfo: OperateStoreTransferInItemInfo
+
   """項次損壞數量"""
   brokenQuantity: Int!
 
@@ -169,14 +155,11 @@ input OperateStoreTransferInItem {
   """訂單料號"""
   materialCode: String!
 
-  """照片"""
-  photo: Upload
+  """實收資訊"""
+  receiveInfo: OperateStoreTransferInItemInfo
 
   """項次實收數量"""
   receivedQuantity: Int!
-
-  """備註"""
-  remark: String
 
   """序號清單"""
   snList: [OperateStoreTransferInSn!]
@@ -188,7 +171,20 @@ input OperateStoreTransferInItem {
   transferOrderItemSeq: ID!
 }
 
+"""調撥單撥入操作品項資訊"""
+input OperateStoreTransferInItemInfo {
+  """照片"""
+  photo: Upload
+
+  """備註"""
+  remark: String
+}
+
+"""調撥單撥入操作請購清單"""
 input OperateStoreTransferInPurchase {
+  """請購資訊"""
+  info: OperateStoreTransferInItemInfo
+
   """是否需要出貨"""
   isShipmentRequired: Boolean!
 
@@ -198,14 +194,8 @@ input OperateStoreTransferInPurchase {
   """訂單料號"""
   materialCode: String!
 
-  """照片"""
-  photo: Upload
-
   """請購數量"""
   quantity: Int!
-
-  """備註"""
-  remark: String
 
   """序號"""
   sn: String
@@ -214,32 +204,22 @@ input OperateStoreTransferInPurchase {
   sourceItemSeq: ID
 }
 
+"""調撥單撥入操作品項序號清單"""
 input OperateStoreTransferInSn {
+  """退貨資訊"""
+  info: OperateStoreTransferInItemInfo
+
   """是否損壞"""
   isBroken: Boolean = false
 
   """是否到貨"""
   isReceived: Boolean!
 
-  """照片"""
-  photo: Upload
-
-  """備註"""
-  remark: String
-
   """序號"""
   sn: String!
 }
 
 type Query {
-  """門市產品關鍵字查詢"""
-  storeMaterialsByKeyword(
-    """料號或品名關鍵字"""
-    keyword: String!
-    limit: Float
-    offset: Float
-  ): MaterialKeywordWrap!
-
   """調撥單品項"""
   storeTransferOrderItems(
     """調撥單單號"""
@@ -387,6 +367,7 @@ type StoreInvoicePool {
   store: Store!
 }
 
+"""調撥單單頭"""
 type StoreTransferOrder {
   """調撥單序號"""
   SNs: [StoreTransferOrderItemSN!]
@@ -449,6 +430,7 @@ type StoreTransferOrder {
   transferOrderCode: String!
 }
 
+"""調撥單單身"""
 type StoreTransferOrderItem {
   """調撥單序號"""
   SNs: [StoreTransferOrderItemSN!]
@@ -490,6 +472,7 @@ type StoreTransferOrderItem {
   transferUnit: String
 }
 
+"""調撥單品項序號清單"""
 type StoreTransferOrderItemSN {
   """品名"""
   productName: String
@@ -516,6 +499,7 @@ type StoreTransferOrderItemSN {
   transferUnit: String
 }
 
+"""調撥單關聯請購單"""
 type StoreTransferOrderPurchase {
   """是否需要出貨"""
   isShipmentRequired: Boolean!
@@ -528,6 +512,9 @@ type StoreTransferOrderPurchase {
 
   """照片"""
   photo: String
+
+  """照片檔名"""
+  photoName: String
 
   """品名"""
   productName: String!
@@ -548,6 +535,7 @@ type StoreTransferOrderPurchase {
   transferOrderItemSeq: ID!
 }
 
+"""調撥單關聯退貨單"""
 type StoreTransferOrderReturn {
   """訂單批號"""
   lotNo: String
@@ -557,6 +545,9 @@ type StoreTransferOrderReturn {
 
   """照片"""
   photo: String
+
+  """照片檔名"""
+  photoName: String
 
   """品名"""
   productName: String!
@@ -580,17 +571,30 @@ type StoreTransferOrderReturn {
   transferOrderItemSeq: ID!
 }
 
+"""調撥單列表"""
 type StoreTransferOrderWrap {
   count: Int!
   storeTransferOrders: [StoreTransferOrder!]!
 }
 
+"""調撥單查詢條件"""
 input TransferOrderFilterInput {
+  """確認碼(狀態)"""
   confirmationCode: EnumConfirmationCode
+
+  """調撥日期開始"""
   createdDate1: String
+
+  """調撥日期結束"""
   createdDate2: String
+
+  """撥入門市"""
   inBoundStoreCode: String
+
+  """法人"""
   legal: String
+
+  """調撥單號"""
   transferOrderCode: String
 }
 

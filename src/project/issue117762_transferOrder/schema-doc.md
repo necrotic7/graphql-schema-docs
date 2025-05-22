@@ -11,8 +11,6 @@
     * [Company](#company)
     * [Department](#department)
     * [District](#district)
-    * [MaterialKeywordDetail](#materialkeyworddetail)
-    * [MaterialKeywordWrap](#materialkeywordwrap)
     * [Role](#role)
     * [SleepTestGroup](#sleeptestgroup)
     * [Store](#store)
@@ -31,6 +29,7 @@
   * [Inputs](#inputs)
     * [OperateStoreTransferInInput](#operatestoretransferininput)
     * [OperateStoreTransferInItem](#operatestoretransferinitem)
+    * [OperateStoreTransferInItemInfo](#operatestoretransferiniteminfo)
     * [OperateStoreTransferInPurchase](#operatestoretransferinpurchase)
     * [OperateStoreTransferInSn](#operatestoretransferinsn)
     * [TransferOrderFilterInput](#transferorderfilterinput)
@@ -63,34 +62,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td colspan="2" valign="top"><strong id="query.storematerialsbykeyword">storeMaterialsByKeyword</strong></td>
-<td valign="top"><a href="#materialkeywordwrap">MaterialKeywordWrap</a>!</td>
-<td>
-
-門市產品關鍵字查詢
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">keyword</td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td>
-
-料號或品名關鍵字
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">limit</td>
-<td valign="top"><a href="#float">Float</a></td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">offset</td>
-<td valign="top"><a href="#float">Float</a></td>
-<td></td>
-</tr>
 <tr>
 <td colspan="2" valign="top"><strong id="query.storetransferorderitems">storeTransferOrderItems</strong></td>
 <td valign="top">[<a href="#storetransferorderitem">StoreTransferOrderItem</a>!]</td>
@@ -430,82 +401,6 @@
 <tr>
 <td colspan="2" valign="top"><strong id="district.vieworder">viewOrder</strong></td>
 <td valign="top"><a href="#int">Int</a>!</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-### MaterialKeywordDetail
-
-<table>
-<thead>
-<tr>
-<th align="left">Field</th>
-<th align="right">Argument</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeyworddetail.code">code</strong></td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td>
-
-料號
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeyworddetail.issnmanage">isSnManage</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
-<td>
-
-是否序號管理
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeyworddetail.name">name</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-品名
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeyworddetail.specification">specification</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-規格
-
-</td>
-</tr>
-</tbody>
-</table>
-
-### MaterialKeywordWrap
-
-<table>
-<thead>
-<tr>
-<th align="left">Field</th>
-<th align="right">Argument</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeywordwrap.count">count</strong></td>
-<td valign="top"><a href="#int">Int</a>!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="materialkeywordwrap.materials">materials</strong></td>
-<td valign="top">[<a href="#materialkeyworddetail">MaterialKeywordDetail</a>!]!</td>
 <td></td>
 </tr>
 </tbody>
@@ -1023,6 +918,8 @@ IPBX 門市 ID
 
 ### StoreTransferOrder
 
+調撥單單頭
+
 <table>
 <thead>
 <tr>
@@ -1224,6 +1121,8 @@ IPBX 門市 ID
 
 ### StoreTransferOrderItem
 
+調撥單單身
+
 <table>
 <thead>
 <tr>
@@ -1356,6 +1255,8 @@ IPBX 門市 ID
 
 ### StoreTransferOrderItemSN
 
+調撥單品項序號清單
+
 <table>
 <thead>
 <tr>
@@ -1443,6 +1344,8 @@ IPBX 門市 ID
 
 ### StoreTransferOrderPurchase
 
+調撥單關聯請購單
+
 <table>
 <thead>
 <tr>
@@ -1486,6 +1389,15 @@ IPBX 門市 ID
 <td>
 
 照片
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="storetransferorderpurchase.photoname">photoName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+照片檔名
 
 </td>
 </tr>
@@ -1548,6 +1460,8 @@ IPBX 門市 ID
 
 ### StoreTransferOrderReturn
 
+調撥單關聯退貨單
+
 <table>
 <thead>
 <tr>
@@ -1582,6 +1496,15 @@ IPBX 門市 ID
 <td>
 
 照片
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="storetransferorderreturn.photoname">photoName</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+照片檔名
 
 </td>
 </tr>
@@ -1652,6 +1575,8 @@ IPBX 門市 ID
 </table>
 
 ### StoreTransferOrderWrap
+
+調撥單列表
 
 <table>
 <thead>
@@ -1880,6 +1805,8 @@ IPBX 門市 ID
 
 ### OperateStoreTransferInInput
 
+調撥單撥入操作參數
+
 <table>
 <thead>
 <tr>
@@ -1921,6 +1848,8 @@ IPBX 門市 ID
 
 ### OperateStoreTransferInItem
 
+調撥單撥入操作品項清單
+
 <table>
 <thead>
 <tr>
@@ -1930,6 +1859,15 @@ IPBX 門市 ID
 </tr>
 </thead>
 <tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="operatestoretransferinitem.brokeninfo">brokenInfo</strong></td>
+<td valign="top"><a href="#operatestoretransferiniteminfo">OperateStoreTransferInItemInfo</a></td>
+<td>
+
+損壞資訊
+
+</td>
+</tr>
 <tr>
 <td colspan="2" valign="top"><strong id="operatestoretransferinitem.brokenquantity">brokenQuantity</strong></td>
 <td valign="top"><a href="#int">Int</a>!</td>
@@ -1967,11 +1905,11 @@ IPBX 門市 ID
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinitem.photo">photo</strong></td>
-<td valign="top"><a href="#upload">Upload</a></td>
+<td colspan="2" valign="top"><strong id="operatestoretransferinitem.receiveinfo">receiveInfo</strong></td>
+<td valign="top"><a href="#operatestoretransferiniteminfo">OperateStoreTransferInItemInfo</a></td>
 <td>
 
-照片
+實收資訊
 
 </td>
 </tr>
@@ -1981,15 +1919,6 @@ IPBX 門市 ID
 <td>
 
 項次實收數量
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinitem.remark">remark</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-備註
 
 </td>
 </tr>
@@ -2023,7 +1952,9 @@ IPBX 門市 ID
 </tbody>
 </table>
 
-### OperateStoreTransferInPurchase
+### OperateStoreTransferInItemInfo
+
+調撥單撥入操作品項資訊
 
 <table>
 <thead>
@@ -2034,6 +1965,49 @@ IPBX 門市 ID
 </tr>
 </thead>
 <tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="operatestoretransferiniteminfo.photo">photo</strong></td>
+<td valign="top"><a href="#upload">Upload</a></td>
+<td>
+
+照片
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="operatestoretransferiniteminfo.remark">remark</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+備註
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### OperateStoreTransferInPurchase
+
+調撥單撥入操作請購清單
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="operatestoretransferinpurchase.info">info</strong></td>
+<td valign="top"><a href="#operatestoretransferiniteminfo">OperateStoreTransferInItemInfo</a></td>
+<td>
+
+請購資訊
+
+</td>
+</tr>
 <tr>
 <td colspan="2" valign="top"><strong id="operatestoretransferinpurchase.isshipmentrequired">isShipmentRequired</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a>!</td>
@@ -2062,29 +2036,11 @@ IPBX 門市 ID
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinpurchase.photo">photo</strong></td>
-<td valign="top"><a href="#upload">Upload</a></td>
-<td>
-
-照片
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="operatestoretransferinpurchase.quantity">quantity</strong></td>
 <td valign="top"><a href="#int">Int</a>!</td>
 <td>
 
 請購數量
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinpurchase.remark">remark</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-備註
 
 </td>
 </tr>
@@ -2111,6 +2067,8 @@ IPBX 門市 ID
 
 ### OperateStoreTransferInSn
 
+調撥單撥入操作品項序號清單
+
 <table>
 <thead>
 <tr>
@@ -2120,6 +2078,15 @@ IPBX 門市 ID
 </tr>
 </thead>
 <tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="operatestoretransferinsn.info">info</strong></td>
+<td valign="top"><a href="#operatestoretransferiniteminfo">OperateStoreTransferInItemInfo</a></td>
+<td>
+
+退貨資訊
+
+</td>
+</tr>
 <tr>
 <td colspan="2" valign="top"><strong id="operatestoretransferinsn.isbroken">isBroken</strong></td>
 <td valign="top"><a href="#boolean">Boolean</a></td>
@@ -2139,24 +2106,6 @@ IPBX 門市 ID
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinsn.photo">photo</strong></td>
-<td valign="top"><a href="#upload">Upload</a></td>
-<td>
-
-照片
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong id="operatestoretransferinsn.remark">remark</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-備註
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong id="operatestoretransferinsn.sn">sn</strong></td>
 <td valign="top"><a href="#string">String</a>!</td>
 <td>
@@ -2170,6 +2119,8 @@ IPBX 門市 ID
 
 ### TransferOrderFilterInput
 
+調撥單查詢條件
+
 <table>
 <thead>
 <tr>
@@ -2182,32 +2133,56 @@ IPBX 門市 ID
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.confirmationcode">confirmationCode</strong></td>
 <td valign="top"><a href="#enumconfirmationcode">EnumConfirmationCode</a></td>
-<td></td>
+<td>
+
+確認碼(狀態)
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.createddate1">createdDate1</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+調撥日期開始
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.createddate2">createdDate2</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+調撥日期結束
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.inboundstorecode">inBoundStoreCode</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+撥入門市
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.legal">legal</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+法人
+
+</td>
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong id="transferorderfilterinput.transferordercode">transferOrderCode</strong></td>
 <td valign="top"><a href="#string">String</a></td>
-<td></td>
+<td>
+
+調撥單號
+
+</td>
 </tr>
 </tbody>
 </table>
