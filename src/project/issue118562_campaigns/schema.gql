@@ -39,8 +39,34 @@ type Campaign {
   """活動開始日"""
   startDate: String
 
+  """活動狀態"""
+  status: EnumCampaignStatus
+
   """更新日期"""
   updatedAt: DateTime
+}
+
+input CampaignFilterInput {
+  """公司id"""
+  companyId: ID
+
+  """活動日期(迄)結束"""
+  endDate: DateTime
+
+  """活動編號"""
+  id: ID
+
+  """活動名稱"""
+  name: String
+
+  """活動來源代號"""
+  sourceCode: EnumCampaignSourceCode
+
+  """活動日期(起)起始"""
+  startDate: DateTime
+
+  """活動狀態"""
+  status: EnumCampaignStatus
 }
 
 """操作活動結果"""
@@ -115,7 +141,7 @@ input CreateCampaignFormFieldInput {
   """潛客資料欄位代號"""
   field: String!
 
-  """表單自定義欄位標籤"""
+  """表單自定義欄位標籤(欄位key值)"""
   tag: String!
 }
 
@@ -202,6 +228,18 @@ enum EnumCampaignSourceCode {
   SurveyCake
 }
 
+"""活動狀態"""
+enum EnumCampaignStatus {
+  """已結束"""
+  ENDED
+
+  """進行中"""
+  ONGOING
+
+  """準備中"""
+  PREPARING
+}
+
 """性別"""
 enum EnumMemberGender {
   Female
@@ -271,6 +309,9 @@ type PotentialTargetFields {
   field: String!
   id: ID!
 
+  """是否必填"""
+  required: Boolean!
+
   """欄位類型"""
   type: String
 
@@ -278,12 +319,24 @@ type PotentialTargetFields {
   updatedAt: DateTime!
 }
 
+"""潛客資料欄位列表"""
+type PotentialTargetFieldsWrap {
+  count: Int!
+  potentialTargetFields: [PotentialTargetFields!]!
+}
+
 type Query {
   """活動查詢"""
-  campaigns(id: ID, limit: Int): [Campaign!]!
+  campaigns(filters: CampaignFilterInput, limit: Int, offset: Int): [Campaign!]!
 
   """活動列表查詢"""
-  campaignsWrap(id: ID, limit: Int): CampaignWrap!
+  campaignsWrap(filters: CampaignFilterInput, limit: Int, offset: Int): CampaignWrap!
+
+  """潛客資料欄位"""
+  potentialTargetFields(filters: SearchPotentialTargetFieldsInput, limit: Int, offset: Int): [PotentialTargetFields!]
+
+  """潛客資料欄位列表"""
+  potentialTargetFieldsWrap(filters: SearchPotentialTargetFieldsInput, limit: Int, offset: Int): PotentialTargetFieldsWrap
 }
 
 """問卷 meta lead ad"""
@@ -348,6 +401,12 @@ type Role {
   filterZones: String
   id: ID!
   name: String!
+}
+
+"""查詢潛客資料欄位條件"""
+input SearchPotentialTargetFieldsInput {
+  """欄位代號"""
+  field: String
 }
 
 type SleepTestGroup {

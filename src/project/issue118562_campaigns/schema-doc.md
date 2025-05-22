@@ -18,6 +18,7 @@
     * [District](#district)
     * [PotentialCustomer](#potentialcustomer)
     * [PotentialTargetFields](#potentialtargetfields)
+    * [PotentialTargetFieldsWrap](#potentialtargetfieldswrap)
     * [QuestionnaireMetaLeadAd](#questionnairemetaleadad)
     * [QuestionnaireSurveycake](#questionnairesurveycake)
     * [Role](#role)
@@ -30,13 +31,16 @@
     * [Zone](#zone)
     * [Zone2](#zone2)
   * [Inputs](#inputs)
+    * [CampaignFilterInput](#campaignfilterinput)
     * [CreateCampaignFormFieldInput](#createcampaignformfieldinput)
     * [CreateCampaignInput](#createcampaigninput)
     * [CreateQuestionnaireMetaInput](#createquestionnairemetainput)
     * [CreateQuestionnaireSurveycakeInput](#createquestionnairesurveycakeinput)
+    * [SearchPotentialTargetFieldsInput](#searchpotentialtargetfieldsinput)
     * [UpdateCampaignInput](#updatecampaigninput)
   * [Enums](#enums)
     * [EnumCampaignSourceCode](#enumcampaignsourcecode)
+    * [EnumCampaignStatus](#enumcampaignstatus)
     * [EnumMemberGender](#enummembergender)
     * [EnumStoreBusinessHourDayOfWeek](#enumstorebusinesshourdayofweek)
     * [EnumStoreType](#enumstoretype)
@@ -73,12 +77,17 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">id</td>
-<td valign="top"><a href="#id">ID</a></td>
+<td colspan="2" align="right" valign="top">filters</td>
+<td valign="top"><a href="#campaignfilterinput">CampaignFilterInput</a></td>
 <td></td>
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">limit</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">offset</td>
 <td valign="top"><a href="#int">Int</a></td>
 <td></td>
 </tr>
@@ -92,12 +101,65 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">id</td>
-<td valign="top"><a href="#id">ID</a></td>
+<td colspan="2" align="right" valign="top">filters</td>
+<td valign="top"><a href="#campaignfilterinput">CampaignFilterInput</a></td>
 <td></td>
 </tr>
 <tr>
 <td colspan="2" align="right" valign="top">limit</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">offset</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="query.potentialtargetfields">potentialTargetFields</strong></td>
+<td valign="top">[<a href="#potentialtargetfields">PotentialTargetFields</a>!]</td>
+<td>
+
+潛客資料欄位
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">filters</td>
+<td valign="top"><a href="#searchpotentialtargetfieldsinput">SearchPotentialTargetFieldsInput</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">limit</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">offset</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="query.potentialtargetfieldswrap">potentialTargetFieldsWrap</strong></td>
+<td valign="top"><a href="#potentialtargetfieldswrap">PotentialTargetFieldsWrap</a></td>
+<td>
+
+潛客資料欄位列表
+
+</td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">filters</td>
+<td valign="top"><a href="#searchpotentialtargetfieldsinput">SearchPotentialTargetFieldsInput</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">limit</td>
+<td valign="top"><a href="#int">Int</a></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">offset</td>
 <td valign="top"><a href="#int">Int</a></td>
 <td></td>
 </tr>
@@ -295,6 +357,15 @@
 <td>
 
 活動開始日
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaign.status">status</strong></td>
+<td valign="top"><a href="#enumcampaignstatus">EnumCampaignStatus</a></td>
+<td>
+
+活動狀態
 
 </td>
 </tr>
@@ -787,6 +858,15 @@
 <td></td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong id="potentialtargetfields.required">required</strong></td>
+<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td>
+
+是否必填
+
+</td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong id="potentialtargetfields.type">type</strong></td>
 <td valign="top"><a href="#string">String</a></td>
 <td>
@@ -803,6 +883,33 @@
 更新時間
 
 </td>
+</tr>
+</tbody>
+</table>
+
+### PotentialTargetFieldsWrap
+
+潛客資料欄位列表
+
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="right">Argument</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="potentialtargetfieldswrap.count">count</strong></td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="potentialtargetfieldswrap.potentialtargetfields">potentialTargetFields</strong></td>
+<td valign="top">[<a href="#potentialtargetfields">PotentialTargetFields</a>!]!</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1707,6 +1814,83 @@ IPBX 門市 ID
 
 ## Inputs
 
+### CampaignFilterInput
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.companyid">companyId</strong></td>
+<td valign="top"><a href="#id">ID</a></td>
+<td>
+
+公司id
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.enddate">endDate</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td>
+
+活動日期(迄)結束
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.id">id</strong></td>
+<td valign="top"><a href="#id">ID</a></td>
+<td>
+
+活動編號
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.name">name</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+活動名稱
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.sourcecode">sourceCode</strong></td>
+<td valign="top"><a href="#enumcampaignsourcecode">EnumCampaignSourceCode</a></td>
+<td>
+
+活動來源代號
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.startdate">startDate</strong></td>
+<td valign="top"><a href="#datetime">DateTime</a></td>
+<td>
+
+活動日期(起)起始
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong id="campaignfilterinput.status">status</strong></td>
+<td valign="top"><a href="#enumcampaignstatus">EnumCampaignStatus</a></td>
+<td>
+
+活動狀態
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### CreateCampaignFormFieldInput
 
 創建活動-潛客資料欄位參數
@@ -1734,7 +1918,7 @@ IPBX 門市 ID
 <td valign="top"><a href="#string">String</a>!</td>
 <td>
 
-表單自定義欄位標籤
+表單自定義欄位標籤(欄位key值)
 
 </td>
 </tr>
@@ -1894,6 +2078,31 @@ SurveyCake表單設定
 </tbody>
 </table>
 
+### SearchPotentialTargetFieldsInput
+
+查詢潛客資料欄位條件
+
+<table>
+<thead>
+<tr>
+<th colspan="2" align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" valign="top"><strong id="searchpotentialtargetfieldsinput.field">field</strong></td>
+<td valign="top"><a href="#string">String</a></td>
+<td>
+
+欄位代號
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ### UpdateCampaignInput
 
 更新表單參數
@@ -2039,6 +2248,45 @@ Resmed租借
 <tr>
 <td valign="top"><strong>SurveyCake</strong></td>
 <td></td>
+</tr>
+</tbody>
+</table>
+
+### EnumCampaignStatus
+
+活動狀態
+
+<table>
+<thead>
+<tr>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td valign="top"><strong>ENDED</strong></td>
+<td>
+
+已結束
+
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>ONGOING</strong></td>
+<td>
+
+進行中
+
+</td>
+</tr>
+<tr>
+<td valign="top"><strong>PREPARING</strong></td>
+<td>
+
+準備中
+
+</td>
 </tr>
 </tbody>
 </table>
